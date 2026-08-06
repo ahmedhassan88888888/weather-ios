@@ -28,14 +28,37 @@
 		5AC22509301DCD78009E14BD /* WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5A021EAA30246A290076AE9D /* Exceptions for "WeatherTests" folder in "WeatherTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"WeatherTests-Info.plist",
+			);
+			target = 5AC22508301DCD78009E14BD /* WeatherTests */;
+		};
+		5A021EAC30246B570076AE9D /* Exceptions for "Weather" folder in "Weather" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5AC224BD301DCBED009E14BD /* Weather */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5AC224C0301DCBED009E14BD /* Weather */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5A021EAC30246B570076AE9D /* Exceptions for "Weather" folder in "Weather" target */,
+			);
 			path = Weather;
 			sourceTree = "<group>";
 		};
 		5AC2250A301DCD78009E14BD /* WeatherTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5A021EAA30246A290076AE9D /* Exceptions for "WeatherTests" folder in "WeatherTests" target */,
+			);
 			path = WeatherTests;
 			sourceTree = "<group>";
 		};
@@ -342,6 +365,8 @@
 				DEVELOPMENT_TEAM = UXRYXR6MR7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WeatherNow uses your location to show local weather.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -374,6 +399,8 @@
 				DEVELOPMENT_TEAM = UXRYXR6MR7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WeatherNow uses your location to show local weather.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -404,6 +431,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UXRYXR6MR7;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WeatherTests-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WeatherNow uses your location to show local weather.";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.weather.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -425,6 +454,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UXRYXR6MR7;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WeatherTests-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WeatherNow uses your location to show local weather.";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.weather.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

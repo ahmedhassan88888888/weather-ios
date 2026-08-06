@@ -6,7 +6,10 @@ struct WeatherNowApp: App {
         WindowGroup {
             WeatherView(
                 viewModel: WeatherViewModel(service: WeatherService(apiKey: Self.apiKey)),
-                forecastViewModel: ForecastViewModel(service: WeatherService(apiKey: Self.apiKey))
+                forecastViewModel: ForecastViewModel(service: WeatherService(apiKey: Self.apiKey)),
+                locationViewModel: LocationWeatherViewModel(
+                    locationService: LocationService()
+                )
             )
         }
     }

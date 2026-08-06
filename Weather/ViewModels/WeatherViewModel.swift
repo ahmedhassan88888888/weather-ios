@@ -26,4 +26,8 @@ final class WeatherViewModel {
             state = .error("Couldn't load weather. Please try again.")
         }
     }
+
+    func showError(_ message: String) {
+        state = .error(message)
+    }
 }
