@@ -20,3 +20,17 @@ struct WeatherCondition: Codable {
     let description: String
     let icon: String
 }
+
+struct ForecastResponse: Codable {
+    let list: [ForecastEntry]
+}
+
+struct ForecastEntry: Codable {
+    let dt: TimeInterval
+    let main: MainWeather
+    let weather: [WeatherCondition]
+
+    var date: Date {
+        Date(timeIntervalSince1970: dt)
+    }
+}

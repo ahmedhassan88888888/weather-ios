@@ -2,10 +2,12 @@ import SwiftUI
 
 struct WeatherView: View {
     @State private var viewModel: WeatherViewModel
+    @State private var forecastViewModel: ForecastViewModel
     @State private var cityInput = "Madrid"
 
-    init(viewModel: WeatherViewModel) {
+    init(viewModel: WeatherViewModel, forecastViewModel: ForecastViewModel) {
         _viewModel = State(initialValue: viewModel)
+        _forecastViewModel = State(initialValue: forecastViewModel)
     }
 
     var body: some View {
@@ -16,7 +18,10 @@ struct WeatherView: View {
                     .padding(.horizontal)
 
                 Button("Get Weather") {
-                    Task { await viewModel.loadWeather(for: cityInput) }
+                    Task {
+                        await viewModel.loadWeather(for: cityInput)
+                        await forecastViewModel.loadForecast(for: cityInput)
+                    }
                 }
 
                 switch viewModel.state {
@@ -35,6 +40,17 @@ struct WeatherView: View {
                     }
                 case .error(let message):
                     ErrorView(message: message)
+                }
+
+                if case .loaded = viewModel.state {
+                    switch forecastViewModel.state {
+                    case .loaded(let forecasts):
+                        ForecastChartView(forecasts: forecasts)
+                    case .loading:
+                        ProgressView()
+                    default:
+                        EmptyView()
+                    }
                 }
 
                 Spacer()

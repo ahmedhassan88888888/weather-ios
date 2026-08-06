@@ -7,6 +7,28 @@ enum WeatherServiceError: Error {
 }
 
 final class WeatherService: WeatherServiceProtocol {
+    func fetchForecast(city: String) async throws -> ForecastResponse {
+        guard let encodedCity = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?q=\(encodedCity)&appid=\(apiKey)&units=metric")
+        else {
+            throw WeatherServiceError.invalidURL
+        }
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode)
+        else {
+            throw WeatherServiceError.invalidResponse
+        }
+
+        do {
+            return try JSONDecoder().decode(ForecastResponse.self, from: data)
+        } catch {
+            throw WeatherServiceError.decodingFailed
+        }
+    }
+    
     private let apiKey: String
 
     init(apiKey: String) {

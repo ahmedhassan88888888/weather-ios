@@ -4,7 +4,10 @@ import SwiftUI
 struct WeatherNowApp: App {
     var body: some Scene {
         WindowGroup {
-            WeatherView(viewModel: WeatherViewModel(service: WeatherService(apiKey: Self.apiKey)))
+            WeatherView(
+                viewModel: WeatherViewModel(service: WeatherService(apiKey: Self.apiKey)),
+                forecastViewModel: ForecastViewModel(service: WeatherService(apiKey: Self.apiKey))
+            )
         }
     }
 
