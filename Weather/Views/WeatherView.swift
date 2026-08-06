@@ -6,6 +6,7 @@ struct WeatherView: View {
     @State private var forecastViewModel: ForecastViewModel
     @State private var locationViewModel: LocationWeatherViewModel
     @State private var cityInput = ""
+    @State private var showSettingsPrompt = false
 
     init(viewModel: WeatherViewModel, forecastViewModel: ForecastViewModel, locationViewModel: LocationWeatherViewModel) {
         _viewModel = State(initialValue: viewModel)
@@ -42,7 +43,17 @@ struct WeatherView: View {
                                 .foregroundStyle(.secondary)
                         }
                     case .error(let message):
-                        ErrorView(message: message)
+                        VStack(spacing: 12) {
+                            ErrorView(message: message)
+                            if showSettingsPrompt {
+                                Button("Open Settings") {
+                                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                                        UIApplication.shared.open(url)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                            }
+                        }
                     }
 
                     if case .loaded = viewModel.state {
@@ -68,15 +79,19 @@ struct WeatherView: View {
         if trimmed.isEmpty {
             do {
                 let city = try await locationViewModel.currentCityName()
+                showSettingsPrompt = false
                 cityInput = city
                 await viewModel.loadWeather(for: city)
                 await forecastViewModel.loadForecast(for: city)
             } catch LocationServiceError.permissionDenied {
-                viewModel.showError("Location access denied. Enter a city name, or enable location in Settings.")
+                showSettingsPrompt = true
+                viewModel.showError("Location access denied. Enter a city name, or tap below to open Settings.")
             } catch {
+                showSettingsPrompt = false
                 viewModel.showError("Couldn't determine your location. Please enter a city.")
             }
         } else {
+            showSettingsPrompt = false
             await viewModel.loadWeather(for: trimmed)
             await forecastViewModel.loadForecast(for: trimmed)
         }
