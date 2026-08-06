@@ -1,0 +1,24 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: macos-14
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
+
+      - name: Run tests
+        run: |
+          xcodebuild test \
+            -project Weather.xcodeproj \
+            -scheme Weather \
+            -destination 'platform=iOS Simulator,name=iPhone 15'
