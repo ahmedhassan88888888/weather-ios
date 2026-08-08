@@ -25,6 +25,7 @@ struct WeatherView: View {
                     Button("Get Weather") {
                         Task { await handleGetWeather() }
                     }
+                    .buttonStyle(.borderedProminent)
 
                     switch viewModel.state {
                     case .idle:
@@ -42,6 +43,10 @@ struct WeatherView: View {
                             Text(weather.weather.first?.description ?? "")
                                 .foregroundStyle(.secondary)
                         }
+                        .padding(24)
+                        .frame(maxWidth: .infinity)
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 20))
+                        .padding(.horizontal)
                     case .error(let message):
                         VStack(spacing: 12) {
                             ErrorView(message: message)
